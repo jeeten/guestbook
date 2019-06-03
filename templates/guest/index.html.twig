@@ -1,0 +1,85 @@
+{% extends 'main.html.twig' %}
+
+{% block title %}Approved Guest List!
+{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block contentmain %}
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        {# <h1 class="h3 mb-2 text-gray-800">Guest List</h1> #}
+        <!-- DataTales Example -->
+            <div class="card shadow mb-4"> <div class="card-header py-3">
+                <div class="text-left float-left w-50">
+                    <i class="fas fa-list">
+                        Guest List</i>
+                </div>
+                <div class="text-right float-left w-50">
+                    <a href="{{ path('guest_new') }}" class="btn btn-primary" role="button">Create new</a>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table cellspacing="0" class="table table-bordered" id="dataTable" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Image</th>
+                                {% if app.user %}
+                                    <th>Staus</th>
+                                    <th>Action</th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Image</th>
+                                {% if app.user %}
+                                    <th>Staus</th>
+                                    <th>Action</th>
+                                {% endif %}
+                            </tr>
+                        </tfoot>
+                        <tbody>
+
+                            {% for guest in guests %}
+                                <tr>
+                                    <td>{{ guest.id }}</td>
+                                    <td>{{ guest.description }}</td>
+                                    <td>
+                                    <img  src="{{ asset('/uploads/guest/' ~ guest.image) }}"  alt="" width="30%" height="30%"> </td>
+                                    {% if app.user %}
+                                        <td>{{ guest.status }}</td>
+                                        <td>
+                                            <a href="{{ path('guest_show', {'id': guest.id}) }}" class="btn btn-sm">
+                                                <i aria-hidden="true" class="fa fa-eye"></i>
+                                            </a>
+                                            {% if is_granted('ROLE_ADMIN') %}
+                                                <a href="{{ path('guest_edit', {'id': guest.id}) }}" class="btn btn-sm">
+                                                    <i aria-hidden="true" class="fa fa-pen"></i>
+                                                    {# <i class="fas fa-trash"></i> #}
+                                                </a>
+                                            {% endif %}
+                                            {% if is_granted('ROLE_ADMIN') %}
+                                                {{  include('guest/_delete_form.html.twig') }}
+                                            {% endif %}
+                                        </td>
+                                    {% endif %}
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5">no records found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

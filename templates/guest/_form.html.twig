@@ -1,0 +1,25 @@
+{{ form_start(formGuest,{ 'attr' : { 'class': 'user' } }) }}
+{% if form_errors(formGuest.description) %}
+    <div class="alert alert-danger">
+        {{ form_errors(formGuest.description) }}
+    </div>
+{% endif %}
+<div class="form-group">
+    {{ form_widget(formGuest.description,{'attr': {'class': 'form-control ',
+    'placeholder': 'Description'}}) }}
+</div>
+<h2 style="padding: 0 ; Text-align : Center;"><span><i>or</i></span></h2>
+<div class="form-group">
+    {{ form_widget(formGuest.defimage,{'attr': {'class': 'form-control form-control-user','placeholder': 'Choose a file'}}) }}
+</div>
+<div class="form-group" style="display:none">
+    {{ form_widget(formGuest.image,{'attr': {'class': 'form-control form-control-user','placeholder': 'Choose a file'}}) }}
+</div>
+{% if is_granted('ROLE_ADMIN') %}
+    <div class="form-group">
+        {{ form_widget(formGuest.status,{'attr': {'class': 'form-control form-control-user','placeholder': 'Status'}}) }}
+    </div>
+{% endif %}
+{# {{ form_widget(formGuest) }} #}
+<button class="btn btn-primary btn-user btn-block">{{ button_label|default('Save') }}</button>
+{{ form_end(formGuest) }}

@@ -1,0 +1,35 @@
+{% extends 'main.html.twig' %}
+
+{% block title %}Guest{% endblock %}
+
+{% block contentmain %}
+    <h1>Guest</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ guest.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ guest.description }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ guest.image }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ guest.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('guest_index') }}">back to list</a>
+     {% if is_granted('ROLE_ADMIN') %} 
+        <a href="{{ path('guest_edit', {'id': guest.id}) }}">edit</a>
+
+        {{ include('guest/_delete_form.html.twig') }}
+    {% endif %}
+{% endblock %}

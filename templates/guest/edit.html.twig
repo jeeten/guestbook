@@ -1,0 +1,20 @@
+{% extends 'main.html.twig' %}
+
+{% block title %}Edit Guest
+{% endblock %}
+
+{% block contentmain %}
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Edit Guest</h1>
+         {{ include('guest/_delete_form.html.twig') }}
+        <a href="{{ path('guest_index') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fa fa-arrow-circle-left fa-sm text-white-50"></i>
+            Back
+        </a>
+    </div>
+    <div>
+        {# {{ include('guest/_form.html.twig', {'button_label': 'Update'}) }} #}
+        {{ include('guest/_form.html.twig', {'button_label': 'Update'}) }}
+    </div>
+{% endblock %}
