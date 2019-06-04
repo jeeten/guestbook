@@ -31,19 +31,15 @@ Install
 	php bin/console server:run
 
 Screens
-
 	![Screenshot](https://github.com/jeeten/guestbook/blob/master/CreateanAccount.png)
 	![Screenshot](https://github.com/jeeten/guestbook/blob/master/WelcometoGuestBook.png)
 	![Screenshot](https://github.com/jeeten/guestbook/blob/master/ApprovedGuestList.png)
 	![Screenshot](https://github.com/jeeten/guestbook/blob/master/Edit_Guest.png)
 
 Validated Screens 
-
 	![Screenshot](https://github.com/jeeten/guestbook/blob/master/CreateanAccountValidate.png)
 	![Screenshot](https://github.com/jeeten/guestbook/blob/master/WelcometoGuestBookValidate.png)
 	![Screenshot](https://github.com/jeeten/guestbook/blob/master/NewGuestValidate.png)
-
-
 
 
 
