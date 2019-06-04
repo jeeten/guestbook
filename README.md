@@ -122,5 +122,5 @@ Unit Test Authonticated User with admin role
 
 Note 
 	
-	1. Web-pack is not emplemented ( will do that ), it's following the traditional css and js.
+	1. Web-pack is not implemented ( will do that ), it's following the traditional css and js.
 	2. Twig Theme has been implemented by referring various tutorial
