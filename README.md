@@ -41,7 +41,31 @@ Validated Screens
 	![Screenshot](https://github.com/jeeten/guestbook/blob/master/WelcometoGuestBookValidate.png)
 	![Screenshot](https://github.com/jeeten/guestbook/blob/master/NewGuestValidate.png)
 
-
+UnitTest ![Description](Anonymous user ---- Checking user access and availablity of page as per HTTP codee.)
+	
+	Email Id Password Authontication Method	   Path	 	   Expected HTTP  
+	N/A	 N/A	  Anonymous	 ANY	   /dashbord	    302 Redirect
+	N/A	 N/A	  Anonymous	 GET	   /guest/ 	    200 Ok
+	N/A	 N/A	  Anonymous	 GET|POST  /guest/new	    302 Redirect
+	N/A	 N/A  	  Anonymous	 GET	   /guest/{id}	    302 Redirect
+	N/A	 N/A	  Anonymous	 GET|POST  /guest/{id}/edit 302 Redirect
+	N/A	 N/A	  Anonymous	 DELETE	   /guest/{id}	    Need to check
+	N/A	 N/A	  Anonymous	 GET|POST  /register	    200 Ok
+	N/A	 N/A	  Anonymous	 GET|POST  /login	    200 Ok
+	N/A	 N/A	  Anonymous	 GET	   /logout	    302 Redirect
+	N/A	 N/A	  Anonymous	 ANY	   /	            200 Ok
+	N/A	 N/A	  Anonymous	 ANY	   /login	    200 Ok
+	
+ 	Command :                    
+		php bin/phpunit # To run all the test cases                  
+		php bin/phpunit tests/Page/PageHttpStatusTest.php # To run the specif test cases  
+		
+	Site Url : http://127.0.0.1:8000/ 
+	Description : Anonymous user ---- Checking user access and availablity of page as per HTTP codee.
+	Status : Done   
+	Testing Type : Functional Testing 
+	File : https://github.com/jeeten/guestbook/blob/master/tests/Page/PageHttpStatusTest.php					
+	
 
 Note 
 	
