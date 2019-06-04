@@ -25,7 +25,7 @@ security:
                     - App\Security\LoginFormAuthenticator
             logout:
                 path: /logout
-                target: /logout_message        
+                target: /login        
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -36,9 +36,13 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/dashbord, roles: [ROLE_USER,ROLE_ADMIN] }
-        - { path: ^/guest/new, roles: [ROLE_USER,ROLE_ADMIN] }
-        - { path: ^/guest/delete, roles: [ROLE_ADMIN] }
-        - { path: ^/guest/[0-9]/edit, roles: [ROLE_ADMIN] }
+        - { path: ^/dashbord$, roles: [ROLE_USER,ROLE_ADMIN] }
+        - { path: ^/guest/new$, roles: [ROLE_USER,ROLE_ADMIN] }
+        - { path: ^/guest/delete$, roles: [ROLE_ADMIN] }
+        - { path: ^/guest/[0-9], roles: [ROLE_USER,ROLE_ADMIN] }
+        - { path: ^/guest/[0-9]/edit, roles: [ROLE_USER,ROLE_ADMIN] }
         - { path: ^/guest$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/logout$, roles: [ROLE_USER,ROLE_ADMIN] }
+        
+        

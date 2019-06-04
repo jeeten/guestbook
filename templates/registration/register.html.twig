@@ -23,7 +23,6 @@
                             {# {{ form_widget(form.name, {'attr': {'class': 'foo'}}) }} #}
                             {{ form_start(registrationForm, { 'attr' : { 'class': 'user' } }) }}
                             {# {% if form_errors(registrationForm) %} #}
-                             
                              {% if form_errors(registrationForm.email) %}
                                     <div class="alert alert-danger">   
                                         {{ form_errors(registrationForm.email) }}

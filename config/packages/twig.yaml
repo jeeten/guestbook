@@ -3,3 +3,6 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     # exception_controller: App\Controller\ExceptionController::showException        
+    # _errors:
+    #     resource: '@TwigBundle/Resources/config/routing/errors.xml'
+    #     prefix:   /_error

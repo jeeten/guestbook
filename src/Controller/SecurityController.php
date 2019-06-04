@@ -40,15 +40,13 @@ class SecurityController extends Controller
      * @param  mixed $authenticationUtils
      *
      * @return Response
-     */
-    /**
-     * @Route("/login", name="app_login")
+     *
+     * @Route("/login", name="app_login", methods={"GET","POST"})
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
@@ -56,27 +54,12 @@ class SecurityController extends Controller
         return $this->render('login/index.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
+    
     /**
-     * logoutMessage
-     *
+     * logout
+     * @Route("/logout", name="logout")
      * @return void
      */
-    
-    /**
-    * @Route("/logout_message", name="logout_message")
-    */
-    public function logoutMessage()
-    {
-        // Flashing the user definced message
-        $this->addFlash('success', 'You\'ve been logged out. Bye bye !');
-
-        // Redirecting to the given route
-        return $this->redirectToRoute('app_login');
-    }
-    
-    /**
-    * @Route("/logout", name="logout")
-    */
     public function logout() {}
 }
 

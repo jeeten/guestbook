@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security; 
 
 /**
  * @Route("/guest")
@@ -23,9 +24,7 @@ class GuestController extends AbstractController
      * @param  mixed $guestRepository
      *
      * @return Response
-     */
-
-    /**
+     *
      * @Route("/", name="guest_index", methods={"GET"})
      */
     public function index(GuestRepository $guestRepository): Response
@@ -55,9 +54,7 @@ class GuestController extends AbstractController
      * @param  mixed $request
      *
      * @return Response
-     */
-
-    /**
+     *
      * @Route("/new", name="guest_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
@@ -119,14 +116,11 @@ class GuestController extends AbstractController
      * @param  mixed $guest
      *
      * @return Response
-     */
-
-    /**
-     * @Route("/{id}", name="guest_show", methods={"GET"})
+     *
+     * @Route("/{id<\d+>}",  defaults={"id" = 0}, name="guest_show", methods={"GET"})
      */
     public function show(Guest $guest): Response
-    {
-        
+    {   
         return $this->render('guest/show.html.twig', [
             'guest' => $guest,
         ]);
@@ -139,23 +133,18 @@ class GuestController extends AbstractController
      * @param  mixed $guest
      *
      * @return Response
-     */    
-
-    /**
-     * @Route("/{id}/edit", name="guest_edit", methods={"GET","POST"})
+     *
+     * @Route("/{id<\d+>}/edit", name="guest_edit", methods={"GET","POST"})
+     * 
      */
     public function edit(Request $request, Guest $guest): Response
     {
+        $user = $this->getUser();
         
-        $image = $guest->getImage();
-        // if($image){
-            
-        //     $guest->setDefimage(
-        //         new File($this->getParameter('uploade_directory').'/'.$image)
-        //     ); 
+        if(!$guest->isCreatedBy($user))
+            throw $this->createNotFoundException('Not allowed');
 
-            
-        // }
+        $image = $guest->getImage();
 
         $form = $this->createForm(GuestType::class, $guest);
         $form->handleRequest($request);
@@ -201,10 +190,8 @@ class GuestController extends AbstractController
      * @param  mixed $guest
      *
      * @return Response
-     */
-
-    /**
-     * @Route("/{id}", name="guest_delete", methods={"DELETE"})
+     *
+     * @Route("/{id<\d+>}", name="guest_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Guest $guest): Response
     {

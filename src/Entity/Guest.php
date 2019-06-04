@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 // use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator\Constraints as AcmeAssert;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Security;
 
 /** 
  * @ORM\Entity(repositoryClass="App\Repository\GuestRepository")
@@ -189,5 +190,17 @@ class Guest
         $this->description = $description;
 
         return $this;
+    }
+
+    /**
+     * isCreatedBy
+     *
+     * @param  mixed $user
+     *
+     * @return bool
+     */
+    public function isCreatedBy(User $user = null): ?bool
+    {
+        return $user && $this->getCreatedBy() === $user;
     }
 }
