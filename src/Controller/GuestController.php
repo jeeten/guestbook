@@ -141,7 +141,7 @@ class GuestController extends AbstractController
     {
         $user = $this->getUser();
         
-        if(!$guest->isCreatedBy($user))
+        if(!$guest->isCreatedBy($user) && !$user->hasRole('ROLE_ADMIN'))
             throw $this->createNotFoundException('Not allowed');
 
         $image = $guest->getImage();
