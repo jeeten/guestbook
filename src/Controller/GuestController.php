@@ -72,7 +72,7 @@ class GuestController extends AbstractController
             }
             
             $file = $form->get('defimage')->getData();
-            if($file){
+            if(isset($file) && !is_null($file)){
                 $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
 
                 // Move the file to the directory where brochures are stored
@@ -98,8 +98,6 @@ class GuestController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Guest Created, will list after admin approval from ');
-            $this->addFlash("error", "Oops, something went wrong!");
-            return $this->redirectToRoute('guest_index');
             return $this->redirectToRoute('guest_index');
         }
 
@@ -141,8 +139,11 @@ class GuestController extends AbstractController
     {
         $user = $this->getUser();
         
-        if(!$guest->isCreatedBy($user) && !$user->hasRole('ROLE_ADMIN'))
-            throw $this->createNotFoundException('Not allowed');
+        if(!$guest->isCreatedBy($user) && !$user->hasRole('ROLE_ADMIN')){
+            $this->addFlash("warning", "Access violation");
+            return $this->redirectToRoute('guest_index');
+        }
+            
 
         $image = $guest->getImage();
 
